@@ -1,6 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -12,14 +10,27 @@ class MY3RDHW_API AMovingFloor : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AMovingFloor();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MovingFloor|Components")
+	USceneComponent* SceneRoot;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|Components")
+	UStaticMeshComponent* StaticMeshComp;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|StartLocation")
+	FVector StartLocation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|MoveSpeed")
+	float MoveSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|MaxRange")
+	float MaxRange;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MovingFloor|TotalDistance")
+	float TotalDistance;
+	
+	UFUNCTION(BlueprintCallable, Category = "MovingFloor|MoveForwardAndBack")
+	void MoveForwardAndBack(float DeltaTime);
 public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 };
