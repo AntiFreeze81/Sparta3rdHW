@@ -14,7 +14,12 @@ ARollingTrap::ARollingTrap()
 	StaticMeshCompRight = CreateDefaultSubobject<UStaticMeshComponent>("StaticMeshCompRight");
 	StaticMeshCompRight->SetupAttachment(StaticMeshComp);
 	
+	const ConstructorHelpers::FObjectFinder<UStaticMesh> CenterMeshAsset(TEXT("/Game/Resources/Shapes/Shape_Cylinder.Shape_Cylinder"));
+	StaticMeshComp->SetStaticMesh(CenterMeshAsset.Object);
 	
+	const ConstructorHelpers::FObjectFinder<UStaticMesh> SideMeshAsset(TEXT("/Game/Resources/Shapes/Shape_Pipe.Shape_Pipe"));
+	StaticMeshCompLeft->SetStaticMesh(SideMeshAsset.Object);
+	StaticMeshCompRight->SetStaticMesh(SideMeshAsset.Object);
 	
 	PrimaryActorTick.bCanEverTick = true;
 }
