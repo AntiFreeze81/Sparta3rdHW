@@ -15,13 +15,13 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MovingFloor|Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "RollingTrap|Components")
 	USceneComponent* SceneRoot;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|Components")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RollingTrap|Components")
 	UStaticMeshComponent* StaticMeshComp;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|Components")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RollingTrap|Components")
 	UStaticMeshComponent* StaticMeshCompLeft;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|Components")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RollingTrap|Components")
 	UStaticMeshComponent* StaticMeshCompRight;
 	
 public:

@@ -21,6 +21,12 @@ ARollingTrap::ARollingTrap()
 	StaticMeshCompLeft->SetStaticMesh(SideMeshAsset.Object);
 	StaticMeshCompRight->SetStaticMesh(SideMeshAsset.Object);
 	
+	const ConstructorHelpers::FObjectFinder<UMaterial> MaterialAsset(TEXT("/Game/Resources/Materials/M_CobbleStone_Smooth.M_CobbleStone_Smooth"));
+	StaticMeshComp->SetMaterial(0, MaterialAsset.Object);
+	StaticMeshCompLeft->SetMaterial(0, MaterialAsset.Object);
+	StaticMeshCompRight->SetMaterial(0, MaterialAsset.Object);
+	
+	
 	PrimaryActorTick.bCanEverTick = true;
 }
 
