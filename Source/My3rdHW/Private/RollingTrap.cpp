@@ -27,6 +27,7 @@ ARollingTrap::ARollingTrap()
 	StaticMeshCompRight->SetMaterial(0, MaterialAsset.Object);
 	
 	RollSpeed = 90.0f;
+	TimerRate = 1.0f;
 	
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -36,12 +37,25 @@ void ARollingTrap::BeginPlay()
 	Super::BeginPlay();
 	
 	StartLocation = GetActorLocation();
+	
+	GetWorldTimerManager().SetTimer(RollTimerHandle, this, &ARollingTrap::RollTrap, CalculateTimerRate(TimerRate), true);
 }
 
 void ARollingTrap::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	AddActorLocalRotation(FRotator(0.0f, RollSpeed * DeltaTime, 0.0f));
 }
 
+void ARollingTrap::RollTrap()
+{
+	AddActorLocalRotation(FRotator(0.0f, RollSpeed * CalculateTimerRate(TimerRate), 0.0f));	
+}
+
+float ARollingTrap::CalculateTimerRate(float InTimerRate)
+{
+	if (InTimerRate > 0.0f)
+	{
+		return 1.0f / InTimerRate;
+	}
+	return 1.0f;
+}
