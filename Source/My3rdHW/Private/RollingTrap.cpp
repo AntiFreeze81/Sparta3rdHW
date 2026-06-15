@@ -26,6 +26,7 @@ ARollingTrap::ARollingTrap()
 	StaticMeshCompLeft->SetMaterial(0, MaterialAsset.Object);
 	StaticMeshCompRight->SetMaterial(0, MaterialAsset.Object);
 	
+	RollSpeed = 90.0f;
 	
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -34,10 +35,13 @@ void ARollingTrap::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	StartLocation = GetActorLocation();
 }
 
 void ARollingTrap::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	AddActorLocalRotation(FRotator(0.0f, RollSpeed * DeltaTime, 0.0f));
 }
 

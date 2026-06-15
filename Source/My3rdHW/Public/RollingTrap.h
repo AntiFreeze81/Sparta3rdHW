@@ -24,6 +24,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RollingTrap|Components")
 	UStaticMeshComponent* StaticMeshCompRight;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RollingTrap|StartLocation")
+	FVector StartLocation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RollingTrap|RollSpeed")
+	float RollSpeed;
+	
 public:
 	virtual void Tick(float DeltaTime) override;
 };
