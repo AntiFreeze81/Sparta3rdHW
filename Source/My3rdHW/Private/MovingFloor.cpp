@@ -23,6 +23,7 @@ AMovingFloor::AMovingFloor()
 	MoveSpeed = 150.0f;
 	MaxRange = 1500.0f;
 	TotalDistance = 0.0f;
+	TimerRate = 1.0f;
 	
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -32,23 +33,35 @@ void AMovingFloor::BeginPlay()
 	Super::BeginPlay();
 	
 	StartLocation = GetActorLocation();
+	
+	TimerRate = CalculateTimerRate(TimerRate);
+	
+	GetWorldTimerManager().SetTimer(MoveTimerHandle, this, &AMovingFloor::MoveForwardAndBack, TimerRate, true);
 }
 
 void AMovingFloor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	MoveForwardAndBack(DeltaTime);
 }
 
-void AMovingFloor::MoveForwardAndBack(float DeltaTime)
+void AMovingFloor::MoveForwardAndBack()
 {
 	if (FMath::FloorToInt32(TotalDistance / MaxRange) & 1)
 	{
-		AddActorWorldOffset(FVector(0.0f, MoveSpeed * DeltaTime, 0.0f));
+		AddActorWorldOffset(FVector(0.0f, MoveSpeed * TimerRate, 0.0f));
 	}
 	else
 	{
-		AddActorWorldOffset(FVector(0.0f, -(MoveSpeed * DeltaTime), 0.0f));
+		AddActorWorldOffset(FVector(0.0f, -(MoveSpeed * TimerRate), 0.0f));
 	}
-	TotalDistance += MoveSpeed * DeltaTime;
+	TotalDistance += MoveSpeed * TimerRate;
+}
+
+float AMovingFloor::CalculateTimerRate(float InTimerRate)
+{
+	if (InTimerRate > 0)
+	{
+		return 1.0f / InTimerRate;
+	}
+	return 1.0f;
 }

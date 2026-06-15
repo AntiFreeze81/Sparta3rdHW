@@ -29,8 +29,17 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MovingFloor|TotalDistance")
 	float TotalDistance;
 	
-	UFUNCTION(BlueprintCallable, Category = "MovingFloor|MoveForwardAndBack")
-	void MoveForwardAndBack(float DeltaTime);
+	UFUNCTION(BlueprintCallable, Category = "MovingFloor|Functions")
+	void MoveForwardAndBack();
+	UFUNCTION(BlueprintCallable, Category = "MovingFloor|Functions")
+	float CalculateTimerRate(float InTimerRate);
+	
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|Timer")
+	float TimerRate;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovingFloor|Timer")
+	FTimerHandle MoveTimerHandle;
+	
 public:
 	virtual void Tick(float DeltaTime) override;
 };
