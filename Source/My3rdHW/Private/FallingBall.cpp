@@ -1,24 +1,25 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿#include "FallingBall.h"
 
-
-#include "FallingBall.h"
-
-
-// Sets default values
 AFallingBall::AFallingBall()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	SceneRoot = CreateDefaultSubobject<USceneComponent>("SceneRoot");
+	SetRootComponent(SceneRoot);
+	
+	StaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>("StaticMeshComp");
+	StaticMeshComp->SetupAttachment(SceneRoot);
+	
+	const ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Game/Resources/Shapes/Shape_Sphere.Shape_Sphere"));
+	StaticMeshComp->SetStaticMesh(MeshAsset.Object);
+	
+	const ConstructorHelpers::FObjectFinder<UMaterial> MaterialAsset(TEXT("/Game/Resources/Materials/M_Rock_Basalt.M_Rock_Basalt"));
+	StaticMeshComp->SetMaterial(0, MaterialAsset.Object);
 }
 
-// Called when the game starts or when spawned
 void AFallingBall::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
-// Called every frame
 void AFallingBall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
