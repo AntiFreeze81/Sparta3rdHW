@@ -1,6 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -12,14 +10,38 @@ class MY3RDHW_API AFallingBallSpawnManager : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AFallingBallSpawnManager();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="FallingBallSpawnManager|Components")
+	USceneComponent* SceneRoot;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="FallingBallSpawnManager|SpawnClass")
+	TSubclassOf<AActor> FallingBallSpawn;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="FallingBallSpawnManager|Timer")
+	FTimerHandle SpawnTimerHandle;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="FallingBallSpawnManager|Timer")
+	float TimerRate;
+	
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="FallingBallSpawnManager|SpawnRange")
+	float MinX;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="FallingBallSpawnManager|SpawnRange")
+	float MaxX;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="FallingBallSpawnManager|SpawnRange")
+	float MinY;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="FallingBallSpawnManager|SpawnRange")
+	float MaxY;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="FallingBallSpawnManager|SpawnRange")
+	float SpawnZ;
+	
+	UFUNCTION(BlueprintCallable, Category="FallingBallSpawnManager|Functions")
+	float CalculateTimerRate(float InTimerRate);
+	UFUNCTION(BlueprintCallable, Category="FallingBallSpawnManager|Functions")
+	void SpawnBallRandomLocation();
 public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 };

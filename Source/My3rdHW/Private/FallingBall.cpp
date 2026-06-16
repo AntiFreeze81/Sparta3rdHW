@@ -13,6 +13,8 @@ AFallingBall::AFallingBall()
 	
 	const ConstructorHelpers::FObjectFinder<UMaterial> MaterialAsset(TEXT("/Game/Resources/Materials/M_Rock_Basalt.M_Rock_Basalt"));
 	StaticMeshComp->SetMaterial(0, MaterialAsset.Object);
+	
+	StaticMeshComp->SetSimulatePhysics(true);
 }
 
 void AFallingBall::BeginPlay()
